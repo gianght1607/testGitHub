@@ -33,8 +33,8 @@ public class Main {
         driver.findElement(By.xpath("//button[@type=\"submit\"]")).click();
 //        driver.switchTo().alert().accept();
        String expU = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[2]/ul/li/span/p")).getText();
-
-
+    // pass: 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
+driver.close();
         
 
         
