@@ -229,7 +229,7 @@
 					}
 				],
 				"url": {
-					"raw": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/admin/users?limit=1&offset=0&sortField=u.userName&sortOrder=ASC",
+					"raw": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/admin/users?limit=1&offset=0&sortField=u.userName&sortOrder=DESC",
 					"protocol": "https",
 					"host": [
 						"opensource-demo",
@@ -259,7 +259,7 @@
 						},
 						{
 							"key": "sortOrder",
-							"value": "ASC"
+							"value": "DESC"
 						}
 					]
 				},
