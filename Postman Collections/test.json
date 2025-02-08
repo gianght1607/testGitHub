@@ -7,73 +7,7 @@
 	"item": [
 		{
 			"name": "New Folder",
-			"item": [
-				{
-					"name": "Login",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "96828d5f-dfef-4a09-b14a-504fd990d91c",
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "6b92cbd4-6faa-491a-9b9f-7a8b5e476a14",
-								"exec": [
-									"let jsonData = pm.response.json()\r",
-									"let actual_token = jsonData.token\r",
-									"console.log (actual_token+\" \"+pm.variables.get(\"token_csv\"))\r",
-									"pm.test(\"Check token\", function () {\r",
-									"    pm.expect(actual_token).to.eql(pm.variables.get(\"token_csv\"));\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "95b53683-f74c-4e38-9a5e-6a6733d5939e",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": "loại dữ liệu đọc được",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"{{email_csv}}\",\r\n    \"password\": \"{{password_csv}}\"\r\n}\r\n\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{url}}/api/login"
-					},
-					"response": []
-				}
-			],
+			"item": [],
 			"id": "1976d6bf-b21e-41be-8354-a5c065be9a95"
 		},
 		{
@@ -168,11 +102,47 @@
 		},
 		{
 			"name": "open source",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0730b06f-e44f-4cb3-a08a-c89e5fbcbd49",
+						"exec": [
+							"pm.sendRequest(\r",
+							"    { \r",
+							"    url: 'https://reqres.in/api/login',\r",
+							"    method: 'POST',\r",
+							"    header: { 'Content-Type': 'application/json' },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            email: \"eve.holt@reqres.in\",\r",
+							"            password: \"cityslicka\"\r",
+							"        })\r",
+							"\r",
+							"    }}, \r",
+							"    function (err, res) { \r",
+							"        pm.environment.set('tokenEnv',res.json().token)       \r",
+							"    }\r",
+							");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "6e51ed7d-9de9-4546-ae90-60d5237bb973",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{tokenEvn}}"
+					}
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -228,6 +198,15 @@
 						"value": "\"Windows\""
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/admin/users?limit=1&offset=0&sortField=u.userName&sortOrder=DESC",
 					"protocol": "https",
