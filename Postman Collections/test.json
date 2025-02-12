@@ -12,6 +12,44 @@
 		},
 		{
 			"name": "unlock dream",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8e02ca0d-1e63-4d60-bf99-8708394e3fa0",
+						"exec": [
+							"function login(username, password) {\r",
+							"    // Cấu hình request login\r",
+							"    const loginRequest = {\r",
+							"        url: 'https://reqres.in/api/login',  // URL của API login\r",
+							"        method: 'POST',  // Phương thức HTTP\r",
+							"        header: {\r",
+							"            'Content-Type': 'application/json',  // Định dạng body\r",
+							"        },\r",
+							"        body: {\r",
+							"            mode: 'raw',\r",
+							"            raw: JSON.stringify({ username: username, password: password }),  // Dữ liệu gửi đi\r",
+							"        },\r",
+							"    };\r",
+							"    // Gửi request login\r",
+							"    pm.sendRequest(loginRequest, function (err, res) {\r",
+							"        if (err) {\r",
+							"            console.error('Login failed:', err);  // Nếu có lỗi, in ra lỗi\r",
+							"        } else {\r",
+							"            // Xử lý response, ví dụ lưu token vào môi trường\r",
+							"            const token = res.json().token;\r",
+							"            pm.collectionVariables.set('authToken', token);  // Lưu token vào môi trường\r",
+							"            console.log('Token saved:', token);  // In token ra console\r",
+							"        }\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "7138a709-c7e6-430d-bd26-5828c92e3aaf",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -251,10 +289,35 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "abb9e655-e91a-47a7-b419-1ecb2fa9a581",
+				"id": "a70fd663-28fa-497a-a14e-d71553c2fc57",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
+					"function login(username, password) {\r",
+					"    // Cấu hình request login\r",
+					"    const loginRequest = {\r",
+					"        url: 'https://reqres.in/api/login',  // URL của API login\r",
+					"        method: 'POST',  // Phương thức HTTP\r",
+					"        header: {\r",
+					"            'Content-Type': 'application/json',  // Định dạng body\r",
+					"        },\r",
+					"        body: {\r",
+					"            mode: 'raw',\r",
+					"            raw: JSON.stringify({ username: username, password: password }),  // Dữ liệu gửi đi\r",
+					"        },\r",
+					"    };\r",
+					"    // Gửi request login\r",
+					"    pm.sendRequest(loginRequest, function (err, res) {\r",
+					"        if (err) {\r",
+					"            console.error('Login failed:', err);  // Nếu có lỗi, in ra lỗi\r",
+					"        } else {\r",
+					"            // Xử lý response, ví dụ lưu token vào môi trường\r",
+					"            const token = res.json().token;\r",
+					"            pm.collectionVariables.set('authToken', token);  // Lưu token vào môi trường\r",
+					"            console.log('Token saved:', token);  // In token ra console\r",
+					"        }\r",
+					"    });\r",
+					"}\r",
 					""
 				]
 			}
@@ -262,7 +325,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "ac5ee8e6-4880-4e22-b776-9899074b5c3a",
+				"id": "69930e35-047f-4f21-b8ae-6f95e597538b",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
