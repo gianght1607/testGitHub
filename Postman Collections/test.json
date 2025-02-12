@@ -330,5 +330,11 @@
 				]
 			}
 		}
+	],
+	"variable": [
+		{
+			"key": "authToken",
+			"value": ""
+		}
 	]
 }
