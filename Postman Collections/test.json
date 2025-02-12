@@ -285,7 +285,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "f18ebcfa-7ebf-4114-8a8f-b5ab7274d74b",
+				"id": "2a3801c1-ec45-4902-afe6-6068cba9fb15",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -311,6 +311,9 @@
 					"            const token = res.json().token;\r",
 					"            pm.collectionVariables.set('authToken', token);  // Lưu token vào môi trường\r",
 					"            console.log('Token saved:', token);  // In token ra console\r",
+					"            pm.test(\"Verify status code\",()=>{\r",
+					"                pm.expect(res.code).to.equal(200)\r",
+					"            })\r",
 					"        }\r",
 					"    });\r",
 					"}\r",
@@ -322,7 +325,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "c6da9ab0-3b91-4149-a73a-69b5f4b27a41",
+				"id": "b993050f-3150-4c5d-b7e5-50d579f4d87e",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
