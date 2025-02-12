@@ -146,8 +146,11 @@
 					"script": {
 						"id": "86d7188a-0fb2-4152-a341-afae938848af",
 						"exec": [
-							"const login = eval(pm.globals.get('loginFunction')); // Lấy hàm từ biến toàn cục\r",
-							"login('eve.holt@reqres.in', 'cityslicka'); // Gọi hàm\r",
+							"eval(pm.globals.get('loginFunction')); // Lấy hàm từ biến toàn cục\r",
+							"login('eve.holt@reqres.in', 'cityslicka'); \r",
+							"pm.test(\"verify token not null\",()=>{\r",
+							"    pm.expect(pm.globals.get(\"loginRes\").token).not.to.be.empty\r",
+							"    })\r",
 							""
 						],
 						"type": "text/javascript",
@@ -285,7 +288,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "2a3801c1-ec45-4902-afe6-6068cba9fb15",
+				"id": "2c1003d8-81bf-4be2-b508-5d49cdcba8d3",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -314,6 +317,7 @@
 					"            pm.test(\"Verify status code\",()=>{\r",
 					"                pm.expect(res.code).to.equal(200)\r",
 					"            })\r",
+					"            pm.globals.set(\"loginRes\",res.json())\r",
 					"        }\r",
 					"    });\r",
 					"}\r",
@@ -325,7 +329,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "b993050f-3150-4c5d-b7e5-50d579f4d87e",
+				"id": "1f94415c-c588-4630-bed2-44dd2abaf6d1",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
