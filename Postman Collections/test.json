@@ -144,25 +144,21 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "0730b06f-e44f-4cb3-a08a-c89e5fbcbd49",
+						"id": "86d7188a-0fb2-4152-a341-afae938848af",
 						"exec": [
-							"pm.sendRequest(\r",
-							"    { \r",
-							"    url: 'https://reqres.in/api/login',\r",
-							"    method: 'POST',\r",
-							"    header: { 'Content-Type': 'application/json' },\r",
-							"    body: {\r",
-							"        mode: 'raw',\r",
-							"        raw: JSON.stringify({\r",
-							"            email: \"eve.holt@reqres.in\",\r",
-							"            password: \"cityslicka\"\r",
-							"        })\r",
-							"\r",
-							"    }}, \r",
-							"    function (err, res) { \r",
-							"        pm.environment.set('tokenEnv',res.json().token)       \r",
-							"    }\r",
-							");\r",
+							"const login = eval(pm.globals.get('loginFunction')); // Lấy hàm từ biến toàn cục\r",
+							"login('eve.holt@reqres.in', 'cityslicka'); // Gọi hàm\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4cb803a-a9bc-48f7-b12b-d56d05e4fbda",
+						"exec": [
 							""
 						],
 						"type": "text/javascript",
@@ -178,7 +174,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "{{tokenEvn}}"
+						"token": "{{tokenEnv}}"
 					}
 				},
 				"method": "GET",
@@ -289,7 +285,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "a70fd663-28fa-497a-a14e-d71553c2fc57",
+				"id": "f18ebcfa-7ebf-4114-8a8f-b5ab7274d74b",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -318,6 +314,7 @@
 					"        }\r",
 					"    });\r",
 					"}\r",
+					"pm.globals.set('loginFunction', login.toString());\r",
 					""
 				]
 			}
@@ -325,7 +322,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "69930e35-047f-4f21-b8ae-6f95e597538b",
+				"id": "c6da9ab0-3b91-4149-a73a-69b5f4b27a41",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
